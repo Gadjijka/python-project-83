@@ -14,7 +14,7 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 class DatabaseConnection:
     def __enter__(self):
         self.connection = connect(DATABASE_URL)
-        self.cursor = self.connection.cursor(cursosr_factory=NamedTupleCursor)
+        self.cursor = self.connection.cursor(cursor_factory=NamedTupleCursor)
         return self.cursor
 
     def __exit__(self, exc_type, exc_value, traceback):
