@@ -14,8 +14,7 @@ from .html import parse_page
 
 load_dotenv()
 app = Flask(__name__)
-app.config['SECRET_KEY'] = 1234567891
-app.config['DATABASE_URL'] = os.getenv('DATABASE_URL')
+app.config['SECRET_KEY'] = '1234567891'
 
 
 @app.get('/')
