@@ -18,7 +18,7 @@ class DatabaseConnection:
                               host='dpg-cougrrud3nmc73adm41g-a',
                               port=5432,
                               user='dbname_r03l_user',
-                              password=DATABASE_PASSWORD,
+                              password='hmGvZtlkNuh0o5OOxs8rYOLNTwTKVr22',
                               dbname='dbname_r03l'
                           )
         self.cursor = self.connection.cursor(cursor_factory=NamedTupleCursor)
