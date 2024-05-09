@@ -71,7 +71,7 @@ class DatabaseConnection:
     def get_checks_by_url_id(id):
         with DatabaseConnection() as cursor:
             query = (
-                'SELECT * FROM urls_checks WHERE url_id=(%s)'
+                'SELECT * FROM url_checks WHERE url_id=(%s)'
                 'ORDER BY id DESC'
             )
             cursor.execute(query, (id,))
