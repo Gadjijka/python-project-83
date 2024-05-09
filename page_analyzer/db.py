@@ -89,7 +89,7 @@ class DatabaseConnection:
         with DatabaseConnection() as cursor:
             query = (
                 'SELECT '
-                'urls.id AS id '
+                'urls.id AS id, '
                 'urls.name AS name, '
                 'url_checks.created_at AS las_check, '
                 'status_code '
@@ -99,7 +99,7 @@ class DatabaseConnection:
                 'AND url_checks.id = ('
                 'SELECT max(id) FROM url_checks'
                 'WHERE urls.id = url_checks.url_id '
-                'ORDER BY url.id DESC;'
+                'ORDER BY urls.id DESC;'
             )
             cursor.execute(query)
             urls = cursor.fetchall()
