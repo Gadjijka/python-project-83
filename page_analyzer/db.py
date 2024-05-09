@@ -78,7 +78,7 @@ class DatabaseConnection:
     def get_checks_by_url_id(id):
         with DatabaseConnection() as cursor:
             query = (
-                'SELECT * FROM url_checks WHERE url_id=(%s)'
+                'SELECT * FROM url_checks WHERE url_id=(%s) '
                 'ORDER BY id DESC'
             )
             cursor.execute(query, (id,))
@@ -98,8 +98,8 @@ class DatabaseConnection:
                 'ON urls.id = url_checks.url_id '
                 'AND url_checks.id = ('
                 'SELECT max(id) FROM url_checks '
-                'WHERE urls.id = url_checks.url_id '
-                'ORDER BY urls.id DESC'
+                'WHERE urls.id = url_checks.url_id) '
+                'ORDER BY urls.id DESC;'
             )
             cursor.execute(query)
             urls = cursor.fetchall()
