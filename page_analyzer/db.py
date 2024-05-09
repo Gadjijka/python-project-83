@@ -91,7 +91,7 @@ class DatabaseConnection:
                 'SELECT '
                 'urls.id AS id, '
                 'urls.name AS name, '
-                'url_checks.created_at AS las_check, '
+                'url_checks.created_at AS last_check, '
                 'status_code '
                 'FROM urls '
                 'LEFT JOIN url_checks '
