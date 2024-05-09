@@ -97,7 +97,7 @@ class DatabaseConnection:
                 'LEFT JOIN url_checks '
                 'ON urls.id = url_checks.url_id '
                 'AND url_checks.id = ('
-                'SELECT max(id) FROM url_checks'
+                'SELECT max(id) FROM url_checks '
                 'WHERE urls.id = url_checks.url_id '
                 'ORDER BY urls.id DESC;'
             )
