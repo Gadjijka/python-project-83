@@ -2,7 +2,7 @@ from psycopg2 import connect
 from psycopg2.extras import NamedTupleCursor
 import os
 from dotenv import load_dotenv
-from datetime import datetime
+from datetime import date
 
 
 
@@ -40,7 +40,7 @@ class DatabaseConnection:
                 'VALUES (%s, %s) '
                 'RETURNING id'
             )
-            values = (url, datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            values = (url, date.today())
             cursor.execute(query, values)
             return cursor.fetchone().id
 
@@ -71,7 +71,7 @@ class DatabaseConnection:
                 check_data.get('h1', ''),
                 check_data.get('title', ''),
                 check_data.get('description', ''),
-                datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+                date.today()
             )
             cursor.execute(query, values)
 
