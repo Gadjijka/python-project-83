@@ -1,3 +1,7 @@
+DROP TABLE if exists urls CASCADE;
+DROP TABLE if exists url_checks CASCADE;
+
+
 CREATE TABLE urls (
     id bigint PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name varchar UNIQUE NOT NULL,
