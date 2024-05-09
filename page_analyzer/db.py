@@ -18,7 +18,7 @@ class DatabaseConnection:
                               host='dpg-cougrrud3nmc73adm41g-a',
                               user='dbname_r03l_user',
                               password=os.getenv('SECRET_KEY'),
-                              dbname=dbname_r03l
+                              dbname='dbname_r03l'
                           )
         self.cursor = self.connection.cursor(cursor_factory=NamedTupleCursor)
         return self.cursor
