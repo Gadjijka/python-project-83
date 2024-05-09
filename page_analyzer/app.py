@@ -7,10 +7,7 @@ import os
 from dotenv import load_dotenv
 import requests
 
-from .db import (
-    get_url_by_name, add_url_into_db, get_url_by_id, get_all_urls,
-    get_checks_by_url_id, add_url_check
-)
+from .db import DatabaseConnection
 
 from .url import validator, normalizer
 from .html import parse_page
@@ -32,29 +29,29 @@ def post_urls():
     if error:
         flash(error, 'Некорректный URL')
         return render_template('index.html'), 422
-    url = normalize(url)
-    data = get_url_by_name(url)
+    url = normalizer(url)
+    data = DatabaseConnection.get_url_by_name(url)
     if data:
         id = data.id
         flash('Страница уже существует', 'alert-info')
     else:
-        id = add_url_into_db(url)
+        id = DatabaseConnection.add_url_into_db(url)
         flash('Страница успешно добавлена', 'alert-success')
     return redirect(url_for('get_url', id=id))
 
 
 @app.get('/urls')
 def get_urls():
-    urls = get_all_urls()
+    urls = DatabaseConnection.get_all_urls()
     return render_template('urls.html', items=urls)
 
 
 @app.get('/urls/<int:id>')
 def get_url(id):
-    url = get_url_by_id(id)
+    url = DatabaseConnection.get_url_by_id(id)
     if url is None:
         return render_template('404.html'), 404
-    checks = get_checks_by_url_id(id)
+    checks = DatabaseConnection.get_checks_by_url_id(id)
     return render_template(
         'url_info.html',
         url=url,
@@ -64,7 +61,7 @@ def get_url(id):
 
 @app.post('/url/<int:id>/checks')
 def url_checks(id):
-    url = get_url_by_id(id)
+    url = DatabaseConnection.get_url_by_id(id)
     try:
         response = requests.get(url.name)
         response.raise_for_status()
@@ -74,7 +71,7 @@ def url_checks(id):
     check_data = parse_page(response.text)
     check_data['url_id'] = id
     check_data['status_code'] = response.status_code
-    add_url_check(check_data)
+    DatabaseConnection.add_url_check(check_data)
     flash('Страница успешно проверена', 'alert-success')
     return redirect(url_for('get_url', id=id))
 

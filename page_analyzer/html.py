@@ -1,7 +1,7 @@
 from bs4 import BeautifulSoup
 
 
-def parser_page(content):
+def parse_page(content):
     parsed_data = {}
     soup = BeautifulSoup(content, 'html.parser')
     h1_tag = soup.find('h1')
