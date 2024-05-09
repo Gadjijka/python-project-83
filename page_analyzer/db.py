@@ -34,7 +34,7 @@ class DatabaseConnection:
 
     def get_url_by_name(url):
         with DatabaseConnection() as cursor:
-            query = 'SELECT * FROM urls WHERE id = (%s)'
+            query = 'SELECT * FROM urls WHERE name = (%s)'
             cursor.execute(query, (url,))
             data = cursor.fetchone()
             return data
