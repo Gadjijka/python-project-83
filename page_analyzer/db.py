@@ -25,7 +25,7 @@ class DatabaseConnection:
         self.connection.commit()
         self.connection.close()
 
-    def add_url_info_db(url):
+    def add_url_into_db(url):
         with DatabaseConnection() as cursor:
             query = 'SELECT * FROM urls WHERE name = (%)'
             cursor.execute(query, (url,))
