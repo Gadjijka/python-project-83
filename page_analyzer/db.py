@@ -16,6 +16,7 @@ class DatabaseConnection:
     def __enter__(self):
         self.connection = connect(
                               host='dpg-cougrrud3nmc73adm41g-a',
+                              port=5432,
                               user='dbname_r03l_user',
                               password=os.getenv('SECRET_KEY'),
                               dbname='dbname_r03l'
