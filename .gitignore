@@ -11,5 +11,5 @@ coverage/
 test-coverage-tool
 htmlcov/
 coverage.xml
-.env
+KEYS.env
 env/
