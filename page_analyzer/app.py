@@ -34,7 +34,7 @@ def post_urls():
     data = DatabaseConnection.get_url_by_name(url)
     if data:
         id = data.id
-#        flash('Страница уже существует', 'alert-info')
+        flash('Страница уже существует', 'alert-info')
     else:
         id = DatabaseConnection.add_url_into_db(url)
         flash('Страница успешно добавлена', 'alert-success')
