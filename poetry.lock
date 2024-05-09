@@ -198,6 +198,16 @@ pycodestyle = ">=2.11.0,<2.12.0"
 pyflakes = ">=3.2.0,<3.3.0"
 
 [[package]]
+name = "flash"
+version = "1.0.3"
+description = "Fast tool"
+optional = false
+python-versions = "*"
+files = [
+    {file = "flash-1.0.3-py3-none-any.whl", hash = "sha256:69f448811abc97d4f0857fc577e14398b322ceddad074430350a5012a61302b2"},
+]
+
+[[package]]
 name = "flask"
 version = "3.0.3"
 description = "A simple framework for building complex web applications."
@@ -626,4 +636,4 @@ watchdog = ["watchdog (>=2.3)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "61adc54058a875b4368abf7b59dde039f3d232d6901fd391c4cf2c4f19b90545"
+content-hash = "78c0829464aa4ee7959d44ac9b84cc999ba4082ddb354ec09a8ce4302c2354bd"

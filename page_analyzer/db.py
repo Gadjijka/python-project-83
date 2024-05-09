@@ -35,7 +35,7 @@ class DatabaseConnection:
     def add_url_into_db(url):
         with DatabaseConnection() as cursor:
             query = (
-                'INSERT INTO urls '
+                'INSERT INTO url '
                 '(name, created_at) '
                 'VALUES (%s, %s) '
                 'RETURNING id'
@@ -46,14 +46,14 @@ class DatabaseConnection:
 
     def get_url_by_name(url):
         with DatabaseConnection() as cursor:
-            query = 'SELECT * FROM urls WHERE name = (%s)'
+            query = 'SELECT * FROM url WHERE name = (%s)'
             cursor.execute(query, (url,))
             data = cursor.fetchone()
             return data
 
     def get_url_by_id(id):
         with DatabaseConnection() as cursor:
-            query = 'SELECT * FROM urls WHERE id = (%s)'
+            query = 'SELECT * FROM url WHERE id = (%s)'
             cursor.execute(query, (id,))
             data = cursor.fetchone()
             return data
@@ -89,17 +89,17 @@ class DatabaseConnection:
         with DatabaseConnection() as cursor:
             query = (
                 'SELECT '
-                'urls.id AS id '
-                'urls.name AS name, '
+                'url.id AS id '
+                'url.name AS name, '
                 'url_checks.created_at AS las_check, '
                 'status_code '
-                'FROM urls '
+                'FROM url '
                 'LEFT JOIN url_checks '
-                'ON urls.id = url_checks.url_id '
+                'ON url.id = url_checks.url_id '
                 'AND url_checks.id = ('
                 'SELECT max(id) FROM url_checks'
-                'WHERE urls.id = url_checks.url_id '
-                'ORDER BY urls.id DESC;'
+                'WHERE url.id = url_checks.url_id '
+                'ORDER BY url.id DESC;'
             )
             cursor.execute(query)
             urls = cursor.fetchall()
