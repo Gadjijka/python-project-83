@@ -4,16 +4,18 @@ import os
 from dotenv import load_dotenv
 from datetime import datetime
 
+
 load_dotenv()
 
+
 DATABASE_URL = os.getenv('DATABASE_URL')
+
 
 class DatabaseConnection:
     def __enter__(self):
         self.connection = connect(DATABASE_URL)
         self.cursor = self.connection.cursor(cursosr_factory=NamedTupleCursor)
         return self.cursor
-
 
     def __exit__(self, exc_type, exc_value, traceback):
         if exc_type is not None:
@@ -23,7 +25,6 @@ class DatabaseConnection:
         self.connection.commit()
         self.connection.close()
 
-
     def add_url_info_db(url):
         with DatabaseConnection() as cursor:
             query = 'SELECT * FROM urls WHERE name = (%)'
@@ -31,14 +32,12 @@ class DatabaseConnection:
             data = cursor.fetchone()
             return data
 
-
     def get_url_by_name(url):
         with DatabaseConnection() as cursor:
             query = 'SELECT * FROM urls WHERE id = (%s)'
-            cursor.execute(quer, (url,))
+            cursor.execute(query, (url,))
             data = cursor.fetchone()
             return data
-
 
     def get_url_by_id(id):
         with DatabaseConnection() as cursor:
@@ -46,7 +45,6 @@ class DatabaseConnection:
             cursor.execute(query, (id,))
             data = cursor.fetchone()
             return data
-
 
     def add_url_check(check_data):
         with DatabaseConnection() as cursor:
@@ -65,14 +63,15 @@ class DatabaseConnection:
             )
             cursor.execute(query, values)
 
-
     def get_checks_by_url_id(id):
-        with DatabaseConnction() as cursor:
-            query = 'SELECT * FROM urls_checks WHERE url_id=(%s) ORDER BY id DESC'
+        with DatabaseConnection() as cursor:
+            query = (
+                'SELECT * FROM urls_checks WHERE url_id=(%s)'
+                'ORDER BY id DESC'
+            )
             cursor.execute(query, (id,))
             checks = cursor.fetchall()
             return checks
-
 
     def get_all_urls():
         with DatabaseConnection() as cursor:
@@ -86,10 +85,10 @@ class DatabaseConnection:
                 'LEFT JOIN url_checks '
                 'ON urls.id = url_checks.url_id '
                 'AND url_checks.id = ('
-                'SELECT max(id) FROM url_checks WHERE urls.id = url_checks.url_id '
+                'SELECT max(id) FROM url_checks'
+                'WHERE urls.id = url_checks.url_id '
                 'ORDER BY urls.id DESC;'
             )
             cursor.execute(query)
             urls = cursor.fetchall()
             return urls
-
