@@ -28,7 +28,7 @@ def post_urls():
     url = request.form.get('url')
     error = validator(url)
     if error:
-        flash(error, 'Некорректный URL')
+        flash(error, 'alert-danger')
         return render_template('index.html'), 422
     url = normalizer(url)
     data = DatabaseConnection.get_url_by_name(url)

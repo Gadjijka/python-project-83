@@ -27,33 +27,4 @@
             </tbody>
         </table>
     </div>
-{% endblock %}{% extends 'base.html' %}
-
-{% block main %}
-    <h1>Сайты</h1>
-
-    <div class="table-responsive">
-        <table class="table table-bordered table-hover text-nowrap" data-test="urls">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Имя</th>
-                    <th>Последняя проверка</th>
-                    <th>Код ответа</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% if items %}
-                    {% for item in items %}
-                        <tr>
-                            <td>{{ item.id }}</td>
-                            <td><a href="{{ url_for('get_url', id=item.id) }}">{{ item.name }}</a></td>
-                            <td>{{ item.last_check if item.last_check is not none else '' }}</td>
-                            <td>{{ item.status_code if item.status_code is not none else '' }}</td>
-                        </tr>
-                    {% endfor %}
-                {% endif %}
-            </tbody>
-        </table>
-    </div>
 {% endblock %}
