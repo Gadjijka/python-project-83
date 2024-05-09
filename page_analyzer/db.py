@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 from datetime import datetime
 
 
+
 load_dotenv()
 
 
@@ -13,7 +14,12 @@ DATABASE_URL = os.getenv('DATABASE_URL')
 
 class DatabaseConnection:
     def __enter__(self):
-        self.connection = connect(DATABASE_URL)
+        self.connection = connect(
+                              host='dpg-cougrrud3nmc73adm41g-a',
+                              user='dbname_r03l_user',
+                              password=os.getenv('SECRET_KEY'),
+                              dbname=dbname_r03l
+                          )
         self.cursor = self.connection.cursor(cursor_factory=NamedTupleCursor)
         return self.cursor
 
