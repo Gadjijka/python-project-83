@@ -27,10 +27,15 @@ class DatabaseConnection:
 
     def add_url_into_db(url):
         with DatabaseConnection() as cursor:
-            query = 'SELECT * FROM urls WHERE name = (%)'
-            cursor.execute(query, (url,))
-            data = cursor.fetchone()
-            return data
+            query = (
+                'INSERT INTO urls'
+                '(name, creted_at)'
+                'VALUES (%s, %s)'
+                'RETURNING id'
+            )
+            values = (url, datetime.now().strftime('%Y-%m-%d %H:%M:%S'))
+            cursor.execute(query, values)
+            return cursor.fetchone().id
 
     def get_url_by_name(url):
         with DatabaseConnection() as cursor:
