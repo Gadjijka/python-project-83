@@ -9,18 +9,12 @@ from datetime import date
 load_dotenv()
 
 
-DATABASE_PASSWORD = os.getenv('PASSWORD')
+DATABASE_URL = os.getenv('DATABASE_URL')
 
 
 class DatabaseConnection:
     def __enter__(self):
-        self.connection = connect(
-                              host='dpg-cougrrud3nmc73adm41g-a',
-                              port=5432,
-                              user='dbname_r03l_user',
-                              password=DATABASE_PASSWORD,
-                              dbname='dbname_r03l'
-                          )
+        self.connection = connect(DATABASE_URL)
         self.cursor = self.connection.cursor(cursor_factory=NamedTupleCursor)
         return self.cursor
 
