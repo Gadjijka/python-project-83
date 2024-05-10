@@ -12,7 +12,7 @@ def validator(url):
     elif len(url) > MAX_URL_LENGHT:
         error = f'URL превышает {MAX_URL_LENGHT} символов'
     elif not validators.url(url):
-        error = 'Неккоректный URL'
+        error = 'Некорректный URL'
     return error
 
 
