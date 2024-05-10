@@ -5,7 +5,6 @@ from dotenv import load_dotenv
 from datetime import date
 
 
-
 load_dotenv()
 
 
