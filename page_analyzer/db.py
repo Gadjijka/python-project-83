@@ -25,6 +25,7 @@ class DatabaseConnection:
         self.connection.commit()
         self.connection.close()
 
+
 def add_url_into_db(url):
     with DatabaseConnection() as cursor:
         query = (
@@ -37,6 +38,7 @@ def add_url_into_db(url):
         cursor.execute(query, values)
         return cursor.fetchone().id
 
+
 def get_url_by_name(url):
     with DatabaseConnection() as cursor:
         query = 'SELECT * FROM urls WHERE name = (%s)'
@@ -44,12 +46,14 @@ def get_url_by_name(url):
         data = cursor.fetchone()
         return data
 
+
 def get_url_by_id(id):
     with DatabaseConnection() as cursor:
         query = 'SELECT * FROM urls WHERE id = (%s)'
         cursor.execute(query, (id,))
         data = cursor.fetchone()
         return data
+
 
 def add_url_check(check_data):
     with DatabaseConnection() as cursor:
@@ -68,6 +72,7 @@ def add_url_check(check_data):
         )
         cursor.execute(query, values)
 
+
 def get_checks_by_url_id(id):
     with DatabaseConnection() as cursor:
         query = (
@@ -77,6 +82,7 @@ def get_checks_by_url_id(id):
         cursor.execute(query, (id,))
         checks = cursor.fetchall()
         return checks
+
 
 def get_all_urls():
     with DatabaseConnection() as cursor:
