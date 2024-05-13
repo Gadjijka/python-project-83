@@ -18,4 +18,4 @@ def validator(url):
 
 def normalizer(url):
     data = urlparse(url)
-    return data.scheme + '://' + data.netloc
+    return f'{data.scheme}://{data.netloc}'
