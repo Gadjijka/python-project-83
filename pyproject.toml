@@ -1,7 +1,7 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "The programm that analyze SEO"
 authors = ["Gajijka <galimovgadjimurad2020@gmail.com>"]
 readme = "README.md"
 packages = [{include = "page_analyzer"}]
@@ -9,7 +9,6 @@ packages = [{include = "page_analyzer"}]
 [tool.poetry.dependencies]
 python = "^3.10"
 flask = "^3.0.3"
-pytest = "^8.2.0"
 flake8 = "^7.0.0"
 gunicorn = "^22.0.0"
 requests = "^2.31.0"
@@ -23,6 +22,7 @@ flash = "^1.0.3"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7.0.0"
+pytest = "^8.2.0"
 
 [build-system]
 requires = ["poetry-core"]
